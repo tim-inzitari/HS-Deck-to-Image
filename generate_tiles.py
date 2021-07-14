@@ -91,7 +91,7 @@ def process(cardid):
         if card['rarity'] == 'RARE':
             bg = Image.open(tile_rare)
         if card['rarity'] == 'COMMON':
-            bg = image.open(tile_common)
+            bg = Image.open(tile_common)
        
         master.paste(bg, (0, 0, 239, 39), bg)
 
@@ -104,7 +104,7 @@ def process(cardid):
         if card['rarity'] == 'RARE':
             bg = Image.open(tile_rare)
         if card['rarity'] == 'COMMON':
-            bg = image.open(tile_common)
+            bg = Image.open(tile_common)
 
         master.paste(bg, (0, 0, 239, 39), bg)
         font = ImageFont.truetype(deck_font, 16)

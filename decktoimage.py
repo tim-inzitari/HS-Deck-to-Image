@@ -20,7 +20,7 @@ tile_loc = 'hs-card-tiles/Tiles/'
 # https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json
 cards_json = 'resources/cards.collectible.json'
 # generated from the the hearthstone client
-tile_legend = 'resources/frame_legendary.png'
+tile_legendary   = 'resources/frame_legendary.png'
 tile_epic = 'resources/frame_epic.png'
 tile_rare = 'resources/frame_rare.png'
 tile_common = 'resources/frame_common.png'
@@ -114,28 +114,32 @@ def deck_to_image(deck, name):
         draw.text((45, 27-deck_font_size+39*index), card['name'], font=font)
 
         if count==2:
+            abg=Image.open(tile_epic).convert("RGBA")
             if card['rarity'] == 'EPIC':
-                bg = Image.open(tile_epic)
+                abg = Image.open(tile_epic).convert("RGBA")
             if card['rarity'] == 'RARE':
-                bg = Image.open(tile_rare)
+                abg = Image.open(tile_rare).convert("RGBA")
             if card['rarity'] == 'COMMON':
-                bg = image.open(tile_common)
+                abg = Image.open(tile_common).convert("RGBA")
+            bg = abg
             master.paste(bg, (0,39*index, 239, 39*(index+1)), bg)
             font = ImageFont.truetype(deck_font, 16)
             w, h = draw.textsize('2', font=font)
             draw.text(((30-w)/2+209,(39-h)/2+39*index), '2', font=font, fill=(229, 181, 68))
         elif card['rarity']=='LEGENDARY':
-            bg = Image.open(tile_legendary)
+            bg = Image.open(tile_legendary).convert("RGBA")
             master.paste(bg, (0,39*index, 239, 39*(index+1)), bg)
             imstar = Image.open(star)
             master.paste(imstar, (214, 39*index+10, 233, 39*index+29), imstar)
         else:
+            abg=Image.open(tile_epic).convert("RGBA")
             if card['rarity'] == 'EPIC':
-                bg = Image.open(tile_epic)
+                abg = Image.open(tile_epic).convert("RGBA")
             if card['rarity'] == 'RARE':
-                bg = Image.open(tile_rare)
+                abg = Image.open(tile_rare).convert("RGBA")
             if card['rarity'] == 'COMMON':
-                bg = image.open(tile_common)
+                abg = Image.open(tile_common).convert("RGBA")
+            bg=abg
             master.paste(bg, (0,39*index, 239, 39*(index+1)), bg)
         msg = str(card['cost'])
         font = ImageFont.truetype(deck_font, 22)
