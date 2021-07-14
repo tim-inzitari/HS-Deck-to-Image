@@ -12,8 +12,10 @@ star = 'resources/star.png'
 
 # https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json 
 cards_json = 'resources/cards.collectible.json'
-tile_container_open = 'resources/tile_container_open.png'
-tile_container_number = 'resources/tile_container_number.png'
+tile_legend = 'resources/frame_legendary.png'
+tile_epic = 'resources/frame_epic.png'
+tile_rare = 'resources/frame_rare.png'
+tile_common = 'resources/frame_common.png'
 
 card_dict = {}
 with open(cards_json, encoding="utf-8") as json_file:
@@ -75,7 +77,7 @@ def process(cardid):
     draw_shadow(draw, 45, 13, card['name'], font)
     draw.text((45, 13), card['name'], font=font)
     if card['rarity']=='LEGENDARY':
-        bg = Image.open(tile_container_number)
+        bg = Image.open(tile_legendary)
         master.paste(bg, (0, 0, 239, 39), bg)
         imstar = Image.open(star)
         master.paste(imstar, (214, 10, 233, 29), imstar)
@@ -84,14 +86,25 @@ def process(cardid):
 
         master.save(u'{}/{}.png'.format(tile_dest,cardid), 'PNG')
     else:
-        bg = Image.open(tile_container_open)
+        if card['rarity'] == 'EPIC':
+            bg = Image.open(tile_epic)
+        if card['rarity'] == 'RARE':
+            bg = Image.open(tile_rare)
+        if card['rarity'] == 'COMMON':
+            bg = image.open(tile_common)
+       
         master.paste(bg, (0, 0, 239, 39), bg)
 
         writeCost(font)
 
         master.save(u'{}/{}.png'.format(tile_dest,cardid), 'PNG')
 
-        bg = Image.open(tile_container_number)
+        if card['rarity'] == 'EPIC':
+            bg = Image.open(tile_epic)
+        if card['rarity'] == 'RARE':
+            bg = Image.open(tile_rare)
+        if card['rarity'] == 'COMMON':
+            bg = image.open(tile_common)
 
         master.paste(bg, (0, 0, 239, 39), bg)
         font = ImageFont.truetype(deck_font, 16)

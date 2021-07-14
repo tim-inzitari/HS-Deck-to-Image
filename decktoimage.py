@@ -20,8 +20,10 @@ tile_loc = 'hs-card-tiles/Tiles/'
 # https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json
 cards_json = 'resources/cards.collectible.json'
 # generated from the the hearthstone client
-tile_container_number = 'resources/tile_container_number.png'
-tile_container_open = 'resources/tile_container_open.png'
+tile_legend = 'resources/frame_legendary.png'
+tile_epic = 'resources/frame_epic.png'
+tile_rare = 'resources/frame_rare.png'
+tile_common = 'resources/frame_common.png'
 star = 'resources/star.png'
 
 deck_font = 'resources/Belwe-Bold.ttf'
@@ -112,18 +114,28 @@ def deck_to_image(deck, name):
         draw.text((45, 27-deck_font_size+39*index), card['name'], font=font)
 
         if count==2:
-            bg = Image.open(tile_container_number)
+            if card['rarity'] == 'EPIC':
+                bg = Image.open(tile_epic)
+            if card['rarity'] == 'RARE':
+                bg = Image.open(tile_rare)
+            if card['rarity'] == 'COMMON':
+                bg = image.open(tile_common)
             master.paste(bg, (0,39*index, 239, 39*(index+1)), bg)
             font = ImageFont.truetype(deck_font, 16)
             w, h = draw.textsize('2', font=font)
             draw.text(((30-w)/2+209,(39-h)/2+39*index), '2', font=font, fill=(229, 181, 68))
         elif card['rarity']=='LEGENDARY':
-            bg = Image.open(tile_container_number)
+            bg = Image.open(tile_legendary)
             master.paste(bg, (0,39*index, 239, 39*(index+1)), bg)
             imstar = Image.open(star)
             master.paste(imstar, (214, 39*index+10, 233, 39*index+29), imstar)
         else:
-            bg = Image.open(tile_container_open)
+            if card['rarity'] == 'EPIC':
+                bg = Image.open(tile_epic)
+            if card['rarity'] == 'RARE':
+                bg = Image.open(tile_rare)
+            if card['rarity'] == 'COMMON':
+                bg = image.open(tile_common)
             master.paste(bg, (0,39*index, 239, 39*(index+1)), bg)
         msg = str(card['cost'])
         font = ImageFont.truetype(deck_font, 22)
