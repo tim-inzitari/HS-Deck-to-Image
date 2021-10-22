@@ -2,6 +2,9 @@
 
 A python script for converting Hearthstone deck codes from a csv to deck images.
 
+## Usage Tutorial  
+https://docs.google.com/document/d/15VI3rpRG8aSRg3ETcyE0lPBbu84uK6jLDRlSuuBmHZ8/edit?usp=sharing  
+
 ## Requirements
 
 * Python 3.6+
